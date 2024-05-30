@@ -51,3 +51,15 @@ Saída:
 Bob
 Alice
 Eve
+
+Explicação:
+
+1. g Alice: Adiciona Alice à fila geral.
+2. p Bob: Adiciona Bob à fila prioritária.
+3. g Charlie: Adiciona Charlie à fila geral.
+4. s: Libera um caixa. Como há um cliente na fila prioritária, Bob é atendido.
+5. g David: Adiciona David à fila geral.
+6. s: Libera um caixa. Como não há clientes na fila prioritária, Alice é atendida.
+7. p Eve: Adiciona Eve à fila prioritária.
+8. s: Libera um caixa. Eve, que está na fila prioritária, é atendida.
+9. f: Finaliza o expediente e imprime a ordem de atendimento dos clientes.
