@@ -36,31 +36,25 @@ Ao finalizar o expediente (`f`), o programa imprime a ordem em que os clientes f
 
 #### Entrada:
 
+```
 g Alan
-
 p Bruno
-
 g Cézar
-
 s
-
 g Douglas
-
 s
-
 p Ernesto
-
 s
-
 f
+```
 
 #### Saída:
 
+```
 Bruno
-
 Alan
-
 Ernesto
+```
 
 #### Explicação:
 
