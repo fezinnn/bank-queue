@@ -2,69 +2,69 @@
 #include <string.h>
 #include "queue.h"
 
-void create_queue(t_queue *q) {
+void createQueue(t_queue *q) {
     q->max = 30;
-    q->inicio = 0;
-    q->fim = 0;
-    q->n = 0;
+    q->start = 0;
+    q->end = 0;
+    q->size = 0;
 }
 
-int is_empty(t_queue *q) {
-    return q->n == 0;
+int isEmpty(t_queue *q) {
+    return q->size == 0;
 }
 
-int is_full(t_queue *q) {
-    return q->n == q->max;
+int isFull(t_queue *q) {
+    return q->size == q->max;
 }
 
-int in(t_queue *q, t_elem x) {
-    if (is_full(q)) return 0;
-    strcpy(q->items[q->fim], x);
-    q->fim = (q->fim + 1) % q->max;
-    q->n++;
+int enterQueue(t_queue *q, t_elem x) {
+    if (isFull(q)) return 0;
+    strcpy(q->items[q->end], x);
+    q->end = (q->end + 1) % q->max;
+    q->size++;
     return 1;
 }
 
-int out(t_queue *q, t_elem *x) {
-    if (is_empty(q)) return 0;
-    strcpy(*x, q->items[q->inicio]); 
-    q->inicio = (q->inicio + 1) % q->max;
-    q->n--;
+int exitQueue(t_queue *q, t_elem *x) {
+    if (isEmpty(q)) return 0;
+    strcpy(*x, q->items[q->start]); 
+    q->start = (q->start + 1) % q->max;
+    q->size--;
     return 1;
 }
 
-void attendCustomer(t_queue *priorityQueue, t_queue *generalQueue, int *p_count, char **namesAttended, int *attended_count) {
+void attendCustomer(t_queue *priorityQueue, t_queue *generalQueue, int *priorityCounter, char **customersAttended, int *attendedCounter) {
     t_elem customer;
-    if (!is_empty(priorityQueue) && *p_count < 3) {
-        out(priorityQueue, &customer);
-        (*p_count)++;
-    } else if (!is_empty(generalQueue)) {
-        out(generalQueue, &customer);
-        *p_count = 0; 
-    } else if (!is_empty(priorityQueue)) {
-        out(priorityQueue, &customer);
-        (*p_count)++;
+    if (!isEmpty(priorityQueue) && *priorityCounter < 3) {
+        exitQueue(priorityQueue, &customer);
+        (*priorityCounter)++;
+    } else if (!isEmpty(generalQueue)) {
+        exitQueue(generalQueue, &customer);
+        *priorityCounter = 0; 
+    } else if (!isEmpty(priorityQueue)) {
+        exitQueue(priorityQueue, &customer);
+        (*priorityCounter)++;
     }
-    namesAttended[*attended_count] = malloc(strlen(customer) + 1);
-    strcpy(namesAttended[(*attended_count)++], customer);
+    customersAttended[*attendedCounter] = malloc(strlen(customer) + 1);
+    strcpy(customersAttended[(*attendedCounter)++], customer);
 }
 
-void registerCustomer(t_queue *priorityQueue, t_queue *generalQueue, char *input) {
+void selectQueue(t_queue *priorityQueue, t_queue *generalQueue, char *input) {
     t_elem customer;
     char queueType = input[0];  
     char *name = input + 2;     
 
     strcpy(customer, name);
     if (queueType == 'p') {
-        in(priorityQueue, customer);
+        enterQueue(priorityQueue, customer);
     } else if (queueType == 'g') {
-        in(generalQueue, customer);
+        enterQueue(generalQueue, customer);
     }
 }
 
-void printAndFreeAttendedNames(char **namesAttended, int attended_count) {
-    for (int i = 0; i < attended_count; i++) {
-        printf("%s\n", namesAttended[i]);
-        free(namesAttended[i]); 
+void freeCashier(char **customersAttended, int attendedCounter) {
+    for (int i = 0; i < attendedCounter; i++) {
+        printf("%s\n", customersAttended[i]);
+        free(customersAttended[i]); 
     }
 }
