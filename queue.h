@@ -15,6 +15,6 @@ void create_queue(t_queue *q);
 int is_empty(t_queue *q);
 int is_full(t_queue *q);
 int in(t_queue *q, t_elem x);
-int out(t_queue *q, t_elem x);
+int out(t_queue *q, t_elem *x);
 
 #endif
