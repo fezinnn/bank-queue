@@ -19,7 +19,6 @@ Para executar o programa, use o comando:
 
 ./bank_queue
 
-
 ## Descrição
 
 O programa lê comandos de entrada para gerenciar duas filas (geral e prioritária) e simula o atendimento de clientes conforme as regras especificadas no trabalho prático. 
@@ -37,4 +36,18 @@ Ao finalizar o expediente (`f`), o programa imprime a ordem em que os clientes f
 
 Entrada:
 
+g Alice
+p Bob
+g Charlie
+s
+g David
+s
+p Eve
+s
+f
 
+Saída:
+
+Bob
+Alice
+Eve
